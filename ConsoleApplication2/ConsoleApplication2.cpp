@@ -6,56 +6,43 @@
 
 using namespace std;
 
-int recfunc(long stpznach, int stp, long stpkontr, bool f);
+
+unsigned gcd(unsigned a, unsigned b);
 
 int main()
 {
-	int numOfMembers;
-	cin >>  numOfMembers;
-	
-	vector<int> stepeni;
-	for (int i = 0; i < numOfMembers; ++i)
-	{
-		int stp = 65536, chln;
-		long chslo = 16;
-		cin >> chln;
-		if (chln > stp)
-		{
-			stepeni.push_back(recfunc(stp*2, chslo+1, chln, false));
-		}
-		else
-		{
-			stepeni.push_back(recfunc(stp/2, chslo-1, chln, true));
-		}
-	}
-	for (auto a : stepeni)
-	{
-		cout << a << '\n';
-	}
+	cout << gcd(0, 45);
+
 	return 0;
 	
 }
 
-int recfunc(long stpznach, int stp, long stpkontr, bool f)
+unsigned recfunc(unsigned a, unsigned b, unsigned mod)
 {
-	if (f) {
-		if (stpkontr < stpznach)
-			return stp;
-		else
-		{
-			return recfunc(stpznach / 2, stp - 1, stpkontr,true);
-		}
+	if(a%mod == 0 && b%mod == 0)
+
+	return mod;
+	return recfunc(a, b, mod - 1);
+
+	
+	
+	}
+unsigned gcd(unsigned a, unsigned b)
+{
+	unsigned mod;
+	if (a == 0 || b == 0)
+		return (a > b ? a : b);
+	if (a > b)
+	{
+		mod = recfunc(a, b,b);
+
 	}
 	else
 	{
-		if (stpkontr < stpznach)
-			return stp-1;
-		else
-		{
-			return recfunc(stpznach * 2, stp + 1, stpkontr, 0);
-		}
+		mod = recfunc(b, a, a);
 	}
-	}
+	return mod;
+}
 
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
