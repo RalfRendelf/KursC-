@@ -3,16 +3,35 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 using namespace std;
 
-
+void rotate(int a[], unsigned size, int shift);
 unsigned gcd(unsigned a, unsigned b);
+void strcat1(char* to, const char* from);
+unsigned strlen1(const char* str);
+int strstr1(const char* text, const char* pattern);
 
 int main()
 {
-	cout << gcd(0, 45);
-
+	//cout << gcd(0, 45);
+	/*int arr[5] = { 1,2,3,4,5 };
+	rotate(arr, 5, 13);
+	for (int i = 0; i < 5; ++i)
+	{
+		cout << arr[i];
+	}*/
+	char str[50] = "same old song";
+	/*cout << strlen1(str);*/
+	char str2[] = "ffff as d sdse";
+	strcat1(str, str2);
+	for(auto a: str)
+	{
+		cout << a;
+	}
+	cout << '1';
+	strstr();
 	return 0;
 	
 }
@@ -43,6 +62,80 @@ unsigned gcd(unsigned a, unsigned b)
 	}
 	return mod;
 }
+void rotate(int a[], unsigned size, int shift)
+{
+	int shiftrez = size - (shift % size);
+	
+	
+	
+	int sdvg, sdvg2;
+	if (shiftrez == 0)
+	{
+		
+	}
+	else {
+		for (int i = 0; i < shiftrez; ++i)
+		{
+			
+				sdvg2 = a[0];
+			
+			
+			for (int g = 0; g < size; ++g)
+			{
+				if (g % 2 == 0) {
+					sdvg = a[(g + 1) % size];
+					a[(g + 1)%size] = sdvg2;
+					
+				}
+				else
+				{
+					sdvg2 = a[(g + 1) % size];
+					a[(g + 1) % size] = sdvg;
+					
+
+				}
+			}
+		}
+	}
+
+
+}
+unsigned strlen1(const char* str)
+{
+	unsigned strlen=0;
+	
+	while (*(str + strlen) != '\0')
+	{
+		 
+		++strlen;
+	}
+
+	return strlen;
+
+}
+void strcat1(char* to, const char* from)
+{
+	int lengthofstr = 0;
+	int lengthofstr2 = 0;
+	while (*(to + lengthofstr) != '\0')
+	{
+		lengthofstr++;
+
+	}
+	while (*(from + lengthofstr2) != '\0')
+	{
+		*(to + lengthofstr++) = *(from + lengthofstr2++);
+
+	}
+	*(to + lengthofstr) = '\0';
+
+
+}
+int strstr1(const char* text, const char* pattern)
+{
+	
+}
+
 
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
