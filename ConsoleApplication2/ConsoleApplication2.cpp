@@ -12,26 +12,56 @@ unsigned gcd(unsigned a, unsigned b);
 void strcat1(char* to, const char* from);
 unsigned strlen1(const char* str);
 int strstr1(const char* text, const char* pattern);
+#define strstr strstr1
+struct test {
+	
+	int ret_value;
+   const char* text;
+	 const char* pattern;
+	test(int a, const char* b, const char* c) { ret_value = a; text = b; pattern = c; }
+};
+test tests[] = {
+		{0, "", ""}, //0
+		{0, "a", ""}, //1
+		{0, "a", "a"}, //2
+		{-1, "a", "b"}, //3
+		{0, "aa", ""}, //4
+		{0, "aa", "a"}, //5
+		{0, "ab", "a"}, //6
+		{1, "ba", "a"}, //7
+		{-1, "bb", "a"}, //8
+		{0, "aaa", ""}, //9
+		{0, "aaa", "a"}, //10
+		{1, "abc", "b"}, //11
+		{2, "abc", "c"}, //12
+		{-1, "abc", "d"}, //13
+		{-1, "a", "aa"}, //14
+		{-1, "a", "ba"}, //15
+		{-1, "a", "ab"}, //16
+		{-1, "a", "bb"}, //17
+		{-1, "a", "aaa"}, //18
+		{-1, "aa", "aaa"}, //19
+		{0, "aaa", "aaa"}, //20
+		{0, "aaab", "aaa"}, //21
+		{1, "baaa", "aaa"}, //22
+		{1, "baaaa", "aaa"}, //23
+		{1, "baaab", "aaa"}, //24
+		{-1, "abd", "abc"}, //25
+		{2, "ababc", "abc"}, //26
+		{3, "abdabc", "abc"}, //27
+		{-1, "", "a"}, //28
+		{2, "asasaf", "asaf"}, //29
+		{2, "ababac", "abac"} //30
+};
 
 int main()
 {
-	//cout << gcd(0, 45);
-	/*int arr[5] = { 1,2,3,4,5 };
-	rotate(arr, 5, 13);
-	for (int i = 0; i < 5; ++i)
-	{
-		cout << arr[i];
-	}*/
-	char str[50] = "same old song";
-	/*cout << strlen1(str);*/
-	char str2[] = "ffff as d sdse";
-	strcat1(str, str2);
-	for(auto a: str)
-	{
-		cout << a;
+	
+	for (int i = 0; i < sizeof(tests) / sizeof(tests[0]); ++i) {
+		int ret = strstr(tests[i].text, tests[i].pattern);
+		(tests[i].ret_value == ret) ? cout << "OK" : cout << "Failed";
+		cout << " : " << i << " (" << tests[i].ret_value << " : " << ret << ")" << endl;
 	}
-	cout << '1';
-	strstr();
 	return 0;
 	
 }
@@ -133,7 +163,72 @@ void strcat1(char* to, const char* from)
 }
 int strstr1(const char* text, const char* pattern)
 {
+	int lengthoftext = 0;
+	int lengthofpattern = 0;
+	bool rez = 1;
+	while (*(text + lengthoftext) != '\0')
+	{
+		lengthoftext++;
+	}
+	while (*(pattern + lengthofpattern) != '\0')
+	{
+		lengthofpattern++;
+	}
+	if (lengthofpattern == 0)
+	{
+		return 0;
+}
+
+	else if (lengthofpattern <= lengthoftext)
+	{
+		int lenght = 0;
+		while (*(text + lenght) != '\0')
+		{
+			if(lengthoftext < lengthofpattern + lenght)
+		{
+			return -1;
+		}
+			int length2 = 0;
+			rez = 1;
+			while (*(pattern + length2) != '\0')
+			{
+				if(*(text+lenght+length2)!=*(pattern+length2)||lenght+length2>lengthoftext)
+				{
+					rez = 0;
+					break;
+				}
+				length2++;
+			}
+			
+			if(rez)
+			{
+				return lenght;
+			}
+				lenght++;
+		}
+	}
+	else if
+		(lengthofpattern > lengthoftext)
+	{
+		return -1;
+	}
+	if (!rez)
+		return -1;
+		
+
 	
+}
+char* resize(const char* str, unsigned size, unsigned new_size)
+{
+	
+	char* str1;
+	str1 = new char[new_size];
+	for (auto i = 0; i < size; i++)
+	{
+		str1[i] = str[i];
+	}
+	delete[] str;
+	return str1;
 }
 
 
