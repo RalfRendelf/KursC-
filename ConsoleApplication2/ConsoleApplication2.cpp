@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
+#include <cstring> 
+#include <cstddef>
 
 using namespace std;
 
@@ -231,6 +233,41 @@ char* resize(const char* str, unsigned size, unsigned new_size)
 	return str1;
 }
 
+struct String {
+
+	/* Реализуйте этот конструктор */
+	String(const char* str = "") {
+		
+		size = strlen(str)+1;
+		this->str = new char[size];
+			
+			for (auto i = 0; i < size; ++i)
+			{
+				this->str[i] = str[i];
+	}
+			this->str[size + 1] = '\0';
+			size--;
+	}
+	String(size_t n, char c) {
+		str = new char[n+1];
+		for (auto i = 0; i < n; ++i)
+		{
+			str[i] = c;
+		}
+		str[n + 1] = '\0';
+
+		
+
+	}
+
+		/* и деструктор */
+		~String() {
+			delete[] str;
+	}
+
+	size_t size;
+	char* str;
+};
 
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
